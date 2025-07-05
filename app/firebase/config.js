@@ -1,6 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
+import * as schema from "./schema"
+
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,5 +24,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const sql = neon("postgresql://neondb_owner:npg_0n3oKDXuzcwC@ep-shiny-bush-a8d6u385-pooler.eastus2.azure.neon.tech/neondb?sslmode=require&channel_binding=require");
+const db = drizzle({ client: sql });
 export const auth=getAuth(app);
